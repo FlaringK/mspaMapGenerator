@@ -1,0 +1,257 @@
+html { scroll-behavior: smooth; }
+
+body {
+	background-color: dimgrey;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	margin: 0;
+
+	--bg: dimgrey;
+	--cross: grey;
+	background: radial-gradient(circle, transparent 20%, var(--bg) 20%, var(--bg) 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, var(--bg) 20%, var(--bg) 80%, transparent 80%, transparent) 25px 25px, linear-gradient(var(--cross) 2px, transparent 2px) 0 -1px, linear-gradient(90deg, var(--cross) 2px, var(--bg) 2px) -1px 0;
+	background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+}
+
+
+#main {
+	margin: auto;
+	padding: 1em;
+	max-width: 1200px;
+}
+
+/* EDITOR */
+
+#editors, .exportflex {
+	display: flex;
+	justify-content: space-between;
+	gap: 2em;
+}
+
+#editors > div, .exportflex > div {
+	flex-grow: 1;
+	max-width: 48%;
+}
+
+.editor {
+	padding: .5em 1em;
+	margin: .5em 0 1em;
+	border-radius: 6px;
+	font-weight: bold;
+
+	border: solid var(--border);
+	background-color: white;
+	background-image: linear-gradient(180deg, var(--gradientStart) 15%, var(--gradientend) 85%);
+	color: var(--quoteColor);
+
+	box-shadow: .5em .5em #fff4;
+	text-shadow: 
+		1px 1px #fff4, 
+		-1px 1px #fff4, 
+		1px -1px #fff4, 
+		-1px -1px #fff4
+		;
+} 
+
+.editorOption {
+	text-align: right;
+}
+
+.sectionEditor {
+	color: black;
+}
+
+.pageEditor {
+	padding: .5em 1em;
+	margin: .5em 0;
+	border-radius: 6px;
+	text-align: right;
+
+	border: solid var(--pageBorder);
+	background-color: #0002;
+}
+
+.editor[divider="true"] > .editorOption,
+.editor[divider="true"] .pageList,
+.editor[divider="true"] > hr {
+	display: none;
+}
+
+.editor[divider="true"] .editorOption.imageUrl {
+	display: block;
+}
+
+.editorOption.pageButtons {
+	text-align: center;
+}
+
+.editorHead {
+	text-align: right;
+}
+
+.editor:first-child .moveUpBtn {
+	display: none;
+}
+
+.editor:last-child .moveDownBtn {
+	display: none;
+}
+
+#adventureGlobalOptions {
+	text-align: center;
+}
+
+#adventureGlobalOptions details, #output details {
+	max-width: 600px;
+	padding: .5em 1em;
+	background-color: #383838;
+	background-image: linear-gradient(180deg, #383838 15%, #2a2a29 85%);
+	color: white;
+	border: solid 2px red;
+	border-radius: 5px;
+	font-family: Verdana;
+	margin: 1em auto;
+}
+
+.deleteSafety {
+	display: inline-block;
+}
+
+/* SITE STUFF */
+
+#output {
+	text-align: center;
+}
+
+h1 {
+	color: white;
+	font-weight: normal;
+}
+
+h2, h1 {
+	text-align: center;
+}
+
+#welcome {
+	max-width: calc(80% + 2em);
+	margin: .5em auto;
+	background-color: white ;
+	padding: .5em 1em;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	font-family: Verdana;
+  	font-weight: 400;
+
+	border: solid 4px #272725;
+	border-radius: 5px;
+	background: linear-gradient(180deg, #383838 15%, #2a2a29 85%);
+	color: #2c79fe;
+}
+
+#welcome p {
+	margin: .75em 1em ;
+}
+
+#welcome img {
+	
+	width: 200px;
+	height: 200px;
+
+  	object-fit: cover;
+	box-sizing: border-box;
+
+	border: solid 2px #71E874;
+	border-radius: 5px;
+
+	margin: 3px 6px;
+}
+
+#tutorials {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 1em;
+}
+
+#tutorials details {
+	width: 40%;
+	padding: .5em 1em;
+	background-color: #383838;
+	background-image: linear-gradient(180deg, #383838 15%, #2a2a29 85%);
+	color: white;
+	border: solid 2px #71E874;
+	border-radius: 5px;
+	font-family: Verdana;
+}
+
+#tutorials details a {
+	color: #2c79fe;
+}
+
+#miniPreviewWindow {
+	position: fixed;
+	top: 0;
+	bottom: -100%;
+	right: 0;
+	transform-origin: 100% 0%;
+	scale: .5;
+	opacity: .9;
+	border-left: solid darkgray 10px;
+}
+
+.previewClose #miniPreviewWindow {
+	display: none;
+}
+
+.previewOpen  {
+	padding-right: 430px;
+}
+
+#windowScroll {
+	overflow-y: scroll;
+	height: 200vh;
+	background: white;
+}
+
+summary, button {
+	cursor: pointer;
+}
+
+button {
+	font-family: 'Courier New', Courier, monospace;
+	font-weight: bold;
+	font-size: large;
+
+	border: none;
+	padding: .25em .5em;
+	border-radius: 8px;
+	box-shadow: .1em .1em grey;
+}
+
+@media only screen and (max-width: 900px) {
+
+	.previewOpen #miniPreviewWindow {
+		display: none;
+	}
+	.previewOpen {
+		padding-right: 0;
+	}
+
+	#previewBtn {
+		display: none;
+	}
+
+}
+
+@media only screen and (max-width: 450px) {
+	
+	#editors {
+		display: block;
+	}
+
+	#editors > div {
+		max-width: 100%;
+	}
+}

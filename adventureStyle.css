@@ -1,0 +1,207 @@
+
+@font-face {
+	font-family: fontstuck;
+	src: url("https://file.garden/X1htvgJ0DEp_tp-Z/MSPFA%20other/fontstuck.ttf");
+}
+
+#adventureMap {
+	padding: 8px;
+	display: grid;
+	grid-template-columns: repeat(2, auto) 1fr repeat(2, auto); 
+	grid-template-rows: repeat(100, auto);
+	grid-column-gap: 8px;
+
+	background-color: white;
+	width: 830px;
+	margin: auto;
+
+	text-align: left;
+	font-weight: normal;
+	font-size: 14px;
+}
+
+#content #adventureMap {
+  margin: 0 -25px;
+}
+
+/* CHAPTER */
+
+#adventureMap .chapter {
+	--headBorder: #F3F3F2;
+	--gradientStart: #FFFFFF;
+	--gradientend: #F6F6F5;
+	--iconBorder: #71E874;
+	--pageBorder: #71E874;
+
+	--titleColor: #C9C9C9;
+	--quoteColor: #00b1ff;
+
+	--row: 1;
+}
+
+#adventureMap .chapter, #adventureMap .divider {
+	grid-column: 3 / 4;
+	grid-row: var(--row) / calc(var(--row) + 1);
+}
+
+#adventureMap .chapterHead {
+	font-family: Verdana;
+  	font-weight: 400;
+
+	position: relative;
+	display: flex;
+	margin: 0 10px 8px;
+
+	border: solid 4px var(--headBorder);
+	border-radius: 5px;
+	background: linear-gradient(180deg, var(--gradientStart) 15%, var(--gradientend) 85%);
+}
+
+#adventureMap .intermission .chapterHead {
+	align-items: center;
+}
+
+#adventureMap .chapterStartLink {
+	position: absolute;
+	top: 0; bottom: 0; left: 0; right: 0;
+	z-index: 10;
+}
+
+#adventureMap .chapterImage {
+	width: 148px;
+	height: 148px;
+
+  	object-fit: cover;
+	box-sizing: border-box;
+
+	border: solid 2px var(--iconBorder);
+	border-radius: 5px;
+
+	margin: 3px 6px;
+}
+
+#adventureMap .intermission .chapterImage {
+	width: 98px;
+	height: 98px;
+}
+
+#adventureMap .chapterDesc {
+	width: max-content;
+	margin: 0 auto;
+	text-align: center;
+	position: relative;
+	padding: 10px;
+	z-index: 20;
+}
+
+#adventureMap .chapterTitle {
+	font-weight: normal;
+	font-size: 22px;
+	color: var(--titleColor);
+	margin: 0 auto 2px;
+	width: max-content;
+}
+
+#adventureMap .chapterQuote {
+	font-weight: normal;
+	font-size: 18px;
+	color: var(--quoteColor);
+	margin: auto;
+	width: max-content;
+}
+
+#adventureMap .chapterNote {
+	position: absolute;
+	bottom: 5px;
+	left: auto;
+	right: auto;
+	translate: -50%;
+}
+
+#adventureMap .chapterPageList {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 7.5px;
+	margin: 8px;
+}
+
+#adventureMap .chapterPage img {
+	width: 98px;
+	height: 98px;
+
+  	object-fit: cover;
+	box-sizing: border-box;
+
+	border: solid 2px var(--pageBorder);
+	border-radius: 5px;
+}
+
+/* DIVIDER */
+
+#adventureMap .divider {
+	text-align: center;
+}
+
+/* sectionS */
+
+#adventureMap .section {
+	--sectionColor: #4be24f;
+	--startChapter: 1;
+	--endChapter: 1;
+	--column: 2;
+	
+	grid-column: var(--column) / calc(var(--column) + 1);
+	grid-row: var(--startChapter) / calc(var(--endChapter) + 1);
+	font-family: fontstuck;
+
+	display: flex;
+}
+
+#adventureMap .section.right {
+	flex-direction: row-reverse;
+}
+
+#adventureMap .sectionSection {
+	width: 16px;
+	border: solid 8px var(--sectionColor);
+	border-right: none;
+	margin-bottom: 8px;
+}
+
+#adventureMap .section.right .sectionSection {
+	border-left: none;
+	border-right: solid 8px var(--sectionColor);
+	margin-right: 0;
+}
+
+#adventureMap .sectionName {
+	width: 27px;
+	margin-top: 24px;
+	margin-left: auto;
+	padding: 6px 0 7px;
+	
+	background-color: var(--sectionColor);
+	color: white;
+
+	text-align: center;
+	font-size: 7px;
+	line-height: 9px;
+}
+
+#adventureMap .section.right .sectionName {
+	margin-left: 0;
+	margin-right: auto;
+}
+
+#adventureMap .sectionChar {
+	font-size: 18px;
+	height: 30px;
+	line-height: 45px;
+	margin-left: 3px;
+}
+
+#adventureMap .sectionIcon {
+	display: block;
+	margin: 5px auto;
+}

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Homestuck Map Generator</title>\
+
+	<link rel="shortcut icon" href="./window.png" type="image/x-icon">
+
+	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="./adventureStyle.css">
+</head>
+<body class="previewOpen">
+	
+	<div id="main">
+
+		<div id="introduction">
+			<div id="welcome">
+				<div>
+					<img src="./The_tumor.webp" alt="">
+				</div>
+				<div>
+					<h1>Homestuck Map Generator</h1>
+					<p>"Welcome to Homestuck Map Generator. This is a desktop web tool that generates a map similar to the one found in homestuck out of HTML. This is made with the site MSPFA in mind, however it also can be used to generate images of Homestuck Maps.</p>
+					<p>The map editor is split into 2 different groups, the Chapter editor and the Section editor. Each chapter contains a list of pages underneath it. And each section groups a number of chapters together. There can be multiple sections in different positions, and sections can overlap.</p>
+					<p>There are a number of tutorials and tips below. There is also a button to load an example adventure to explore how the editor works in action."</p>
+				</div>
+			</div>
+			<div id="tutorials">
+
+				<details>
+					<summary>Saving your adventure</summary>
+					<div>
+						<p>You may want to save and load your map after making it so that you don’t have to remake it to update it. Under the ‘Exporting and Importing Map Objects’ option in the global adventure options there is the ‘Export Current Map' box full of the JSON object of the current adventure you’ve made. Copy that text and save it in a safe place. When you want to load your adventure again, paste your saved JSON object into the ‘Import Map’ box and click the import button.</p>
+						<p>Your adventure will also be saved to your browser’s local storage, so if you accidentally close and open the site your progress should be safe. However this is unreliable and shouldn’t be your only method of saving your work.</p>
+					</div>
+				</details>
+
+				<details>
+					<summary>Using images</summary>
+					<div>
+						<p>This tool does not allow you to upload your own images to use, instead you must use another site to host your images and then link them here. <a href="https://filegarden.com/">File Garden</a> is a site that I would recommend.</p>
+						<p>The generator will automatically resize and crop the main chapter Image and any page images. This means if you are making an adventure that uses images hosted online, you can use your panel images directly as page and main images, saving you the work of cropping them yourself.</p>
+					</div>
+				</details>
+
+				<details>
+					<summary>Chapter types</summary>
+					<div>
+						<p>Chapters can be of 3 types. A regular chapter has its chapter image, its title, a quote, and a fun small image at the bottom. An intermission has a smaller chapter image and no fun image at the bottom of its header, this can be toggled by the “Is Intermission” checkbox. </p>
+						<p>Finally they can be a divider, which is not a real chapter but rather simply an image that goes between chapters, however they count as a chapter for the sake of the section editor. This can be toggled by the “Toggle make Divider” button. Divider images are typically 610px across and 64px high, but this generator will not enforce that.</p>
+					</div>
+				</details>
+
+				<details>
+					<summary>Saving your map as an Image</summary>
+					<div>
+						<p>If you’re on desktop firefox, you can use the shortcut Ctrl + Shift + S and select the Map preview to save it as an image. Otherwise you can save the HTML output to a .html file, open that in your browser and save the page from there.</p>
+					</div>
+				</details>
+
+				<details>
+					<summary>Editor tips</summary>
+					<div>
+						<p>You can click each chapter heading on the side preview window to scroll to that chapter in the editor.</p>
+						<p>Page links are generally 20 - 50 pages appart, but this is by no means a hard rule.</p>
+						<p>Be sure to save your export often. You never know when you might make a time costly mistake.</p>
+					</div>
+				</details>
+
+				<details>
+					<summary>Style tips</summary>
+					<div>
+						<p>Here are a few style tips based on the homestuck map:</p>
+						<p>Page border color and icon border color stay the same (mostly) through every chapter.</p>
+						<p>Sections don’t end or start on a chapter divider.</p>
+						<p>In addition to hex codes, you can also write CSS color names into the color inputs.</p>
+					</div>
+				</details>
+
+				
+
+			</div>
+		</div>
+
+		<div id="adventureGlobalOptions">
+
+			<h2>GLOBAL ADVENTURE OPTIONS</h2>
+
+			<div>
+				<button onclick="toggleMiniPreview()" id="previewBtn">Toggle mini preview</button>
+			</div>
+
+			<details>
+				<summary>Exporting and Importing Map Objects</summary>
+				<div class="exportflex">
+					<div>
+						<h3>Export Current Map</h3>
+						<textarea name="" id="exportTextarea"></textarea>
+					</div>
+					<div>
+						<h3>Import Map</h3>
+						<textarea name="" id="importTextarea"></textarea> <br>
+						<button onclick="importMap()">Import</button>
+					</div>
+				</div>
+			</details>
+
+			<details>
+				<summary>Reset Current Map</summary>
+				<div>
+					<h3>WARNING: You will lose the current map you've made, make sure you save your map from the export menu!</h3>
+					<hr>
+					<button onclick="clearMapObject()">CLEAR ADVENTURE MAP</button> 
+					<button onclick="currentMap = exampleMap; updateGUI()">RESTORE EXAMPLE MAP</button>
+				</div>
+			</details>
+
+
+		</div>
+
+		<div id="editors">
+
+			<div>
+
+				<h2>Chapter Editor</h2>
+
+				<div id="chapterList">
+
+					<div class="editor chapterEditor">
+						<div class="editorHead">
+							<button class="dividerBtn">Toggle Make Divider</button>
+							<button class="moveUpBtn">⬆️</button>
+							<button class="moveDownBtn">⬇️</button>
+							<details class="deleteSafety">
+								<summary>🗑️</summary>
+								<button class="deleteBtn">Delete Chapter</button>
+							</details>
+							<hr>
+						</div>
+						<div class="editorOption">Chapter Name: <input type="text" name="title" placeholder="Act 1"></div>
+						<div class="editorOption">Chapter Quote: <input type="text" name="quote" placeholder="This is a cool quote"></div>
+						<div class="editorOption">Chapter URL: <input type="text" name="url" placeholder="/..."></div>
+						<div class="editorOption">Is intermission: <input type="checkbox" name="intermission"></div>
+						<hr>
+						<div class="editorOption">Chapter Border Color: <input type="text" name="headBorder" placeholder="F3F3F2"></div>
+						<div class="editorOption">Gradient Start Color: <input type="text" name="gradientStart" placeholder="FFFFFF"></div>
+						<div class="editorOption">Gradient End Color: <input type="text" name="gradientend" placeholder="F6F6F5"></div>
+						<div class="editorOption">Title Text Color: <input type="text" name="titleColor" placeholder="C9C9C9"></div>
+						<div class="editorOption">Quote Text Color: <input type="text" name="quoteColor" placeholder="00b1ff"></div>
+						<div class="editorOption">Icon Border Color: <input type="text" name="iconBorder" placeholder="71E874" value="71E874"></div>
+						<div class="editorOption">Page Border Color: <input type="text" name="pageBorder" placeholder="71E874" value="71E874"></div>
+						<hr>
+						<div class="editorOption imageUrl">Main Image URL: <input type="text" name="imageUrl" placeholder="https://..."></div>
+						<div class="editorOption">Bottom Image URL: <input type="text" name="noteUrl" placeholder="https://..."></div>
+						<hr>
+						<div class="editorOption pageButtons">
+							<button class="addPageBtn">Add Page</button>
+							<button class="removePageBtn">Remove Page</button>
+						</div>
+						<div class="pageList">
+							<div class="pageEditor">
+								Page Link URL: <input type="text" name="pagelinkURL" placeholder="/..."> <br>
+								Page Image URL: <input type="text" name="pageimgURL" placeholder="https://...">
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<button class="addChapterBtn" onclick="addChapter()">Add chapter</button>
+
+			</div>
+
+			<div>
+
+				<h2>Section Editor</h2>
+
+				<div id="sectionList">
+
+					<div class="editor sectionEditor">
+						<div class="editorHead">
+							<button class="moveUpBtn">⬆️</button>
+							<button class="moveDownBtn">⬇️</button>
+							<details class="deleteSafety">
+								<summary>🗑️</summary>
+								<button class="deleteBtn">Delete Section</button>
+							</details>
+							<hr>
+						</div>
+						<div class="editorOption">Section Name: <input type="text" name="name" placeholder="Part"></div>
+						<div class="editorOption">Section Number: <input type="text" name="number" placeholder="1"></div>
+						<hr>
+						<div class="editorOption">Section Color: <input type="text" name="color" placeholder="4be24f"></div>
+						<div class="editorOption">Section Image URL: <input type="text" name="iconUrl" placeholder="https://..."></div>
+						<hr>
+						<div class="editorOption">Start Chapter: <input type="number" min="0" name="startChapter" placeholder="1"></div>
+						<div class="editorOption">End Chapter: <input type="number" min="0" name="endChapter" placeholder="2"></div>
+						<div class="editorOption">Section Position:
+							<select name="position">
+								<option value="1">Outer Left</option>
+								<option value="2" selected>Inner Left</option>
+								<option value="4">Inner Right</option>
+								<option value="5">Outer Right</option>
+							</select>
+						</div>
+					</div>
+
+				</div>
+
+				<button class="addSectionBtn" onclick="addSection()">Add Section</button>
+			</div>
+
+			
+		</div>
+
+		<div id="output">
+			<details>
+				<summary>Final HTML output</summary>
+				<div>
+					<textarea name="htmlOutput" id="htmlOutput" cols="30" rows="10"></textarea>
+				</div>
+			</details>
+		</div>
+
+		<div id="preview">
+			
+			<style>
+				@font-face{font-family:fontstuck;src:url("https://file.garden/X1htvgJ0DEp_tp-Z/MSPFA%20other/fontstuck.ttf")}#adventureMap{padding:8px;display:grid;grid-template-columns:repeat(2,auto) 1fr repeat(2,auto);grid-template-rows:repeat(100,auto);grid-column-gap:8px;background-color:#fff;width:830px;margin:auto;text-align:left;font-weight:400;font-size:14px}#content #adventureMap{margin:0 -25px}#adventureMap .chapter{--headBorder:#F3F3F2;--gradientStart:#FFFFFF;--gradientend:#F6F6F5;--iconBorder:#71E874;--pageBorder:#71E874;--titleColor:#C9C9C9;--quoteColor:#00b1ff;--row:1}#adventureMap .chapter,#adventureMap .divider{grid-column:3/4;grid-row:var(--row)/calc(var(--row) + 1)}#adventureMap .chapterHead{font-family:Verdana;font-weight:400;position:relative;display:flex;margin:0 10px 8px;border:solid 4px var(--headBorder);border-radius:5px;background:linear-gradient(180deg,var(--gradientStart) 15%,var(--gradientend) 85%)}#adventureMap .intermission .chapterHead{align-items:center}#adventureMap .chapterStartLink{position:absolute;top:0;bottom:0;left:0;right:0;z-index:10}#adventureMap .chapterImage{width:148px;height:148px;object-fit:cover;box-sizing:border-box;border:solid 2px var(--iconBorder);border-radius:5px;margin:3px 6px}#adventureMap .intermission .chapterImage{width:98px;height:98px}#adventureMap .chapterDesc{width:max-content;margin:0 auto;text-align:center;position:relative;padding:10px;z-index:20}#adventureMap .chapterTitle{font-weight:400;font-size:22px;color:var(--titleColor);margin:0 auto 2px;width:max-content}#adventureMap .chapterQuote{font-weight:400;font-size:18px;color:var(--quoteColor);margin:auto;width:max-content}#adventureMap .chapterNote{position:absolute;bottom:5px;left:auto;right:auto;translate:-50%}#adventureMap .chapterPageList{display:flex;justify-content:center;flex-wrap:wrap;gap:7.5px;margin:8px}#adventureMap .chapterPage img{width:98px;height:98px;object-fit:cover;box-sizing:border-box;border:solid 2px var(--pageBorder);border-radius:5px}#adventureMap .divider{text-align:center}#adventureMap .section{--sectionColor:#4be24f;--startChapter:1;--endChapter:1;--column:2;grid-column:var(--column)/calc(var(--column) + 1);grid-row:var(--startChapter)/calc(var(--endChapter) + 1);font-family:fontstuck;display:flex}#adventureMap .section.right{flex-direction:row-reverse}#adventureMap .sectionSection{width:16px;border:solid 8px var(--sectionColor);border-right:none;margin-bottom:8px}#adventureMap .section.right .sectionSection{border-left:none;border-right:solid 8px var(--sectionColor);margin-right:0}#adventureMap .sectionName{width:27px;margin-top:24px;margin-left:auto;padding:6px 0 7px;background-color:var(--sectionColor);color:#fff;text-align:center;font-size:7px;line-height:9px}#adventureMap .section.right .sectionName{margin-left:0;margin-right:auto}#adventureMap .sectionChar{font-size:18px;height:30px;line-height:45px;margin-left:3px}#adventureMap .sectionIcon{display:block;margin:5px auto}
+			</style>
+
+			<div id="adventureMap">
+				
+				<div class="chapter full" id="chapter1" style=" --headBorder: #F3F3F2; --gradientStart: #fff; --gradientend: #F6F6F5; --iconBorder: #71E874; --pageBorder: #71E874; --titleColor: #C9C9C9; --quoteColor: #00b1ff;">
+					<div class="chapterHead">
+						<a class="chapterStartLink" href=""></a>
+						<img class="chapterImage" src="https://file.garden/ZLrd3ieVhBA68g1P/w/house.png">
+						<div class="chapterDesc">
+							<h2 class="chapterTitle">Act 1</h2>
+							<div class="chapterQuote">"Some cool ass quote"</div>
+							<img class="chapterNote" src="https://mspfa.com/images/heart.png">
+						</div>
+					</div>
+					<div class="chapterPageList">
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+					</div>
+				</div>
+
+				<div class="chapter intermission" id="chapter2">
+					<div class="chapterHead">
+						<a class="chapterStartLink" href=""></a>
+						<img class="chapterImage" src="https://file.garden/ZLrd3ieVhBA68g1P/w/house.png">
+						<div class="chapterDesc">
+							<h2 class="chapterTitle">Act 1</h2>
+							<div class="chapterQuote">"Some cool ass quote"</div>
+						</div>
+					</div>
+					<div class="chapterPageList">
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+						<a class="chapterPage" href=""><img src="https://file.garden/ZLrd3ieVhBA68g1P/w/0002n.png"></a>
+					</div>
+				</div>
+
+				<div class="divider" style="--row: 3">
+					<img src="https://file.garden/X1htvgJ0DEp_tp-Z/map_bifurcate.gif">
+				</div>
+
+				<!-- Sections -->
+
+				<div class="section" style=" --sectionColor: #4be24f; --startChapter: 1; --endChapter: 1; --column: 2;">
+					<div class="sectionLabel">
+						<div class="sectionName">
+							P <br> A <br> R <br> T <br> <div class="sectionChar">1</div>
+						</div>
+						<img src="https://mspfa.com/images/pages.png" class="sectionIcon">
+					</div>
+					<div class="sectionSection"></div>
+				</div>
+
+				<div class="section" style=" --sectionColor: #4be24f; --startChapter: 2; --endChapter: 2; --column: 2;">
+					<div class="sectionLabel">
+						<div class="sectionName">
+							P <br> A <br> R <br> T <br> <div class="sectionChar">2</div> 
+						</div>
+						<img src="https://mspfa.com/images/pages.png" class="sectionIcon">
+					</div>
+					<div class="sectionSection"></div>
+				</div>
+
+				<div class="section" style=" --sectionColor: #4be24f; --startChapter: 1; --endChapter: 3; --column: 1;">
+					<div class="sectionLabel">
+						<div class="sectionName">
+							S <br> I <br> D <br> E <br> <div class="sectionChar">1</div> 
+						</div>
+						<img src="https://file.garden/X1htvgJ0DEp_tp-Z/MSPFA%20other/window.png" class="sectionIcon">
+					</div>
+					<div class="sectionSection"></div>
+				</div>
+
+				<div class="section right" style=" --sectionColor: #4be24f; --startChapter: 1; --endChapter: 3; --column: 4;">
+					<div class="sectionLabel">
+						<div class="sectionName">
+							S <br> I <br> D <br> E <br> 
+							<div class="sectionChar">1</div> 
+						</div>
+						<img src="https://mspfa.com/images/pages.png" class="sectionIcon">
+					</div>
+					<div class="sectionSection"></div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div id="miniPreviewWindow">
+		<div id="windowScroll">
+			<div id="adventureMap"></div>
+		</div>
+	</div>
+
+	<script src="./html2canvas.min.js"></script>
+	<script src="./mapgen.js"></script>
+
+</body>
+</html>
