@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Homestuck Map Generator</title>\
+	<title>Homestuck Map Generator</title>
+	
+	<meta content="Homestuck Map Generator" property="og:title" />
+	<meta content="Make your own homestuck style map!" property="og:description" />
+	<meta content="https://flaringk.github.io/mspaMapGenerator/" property="og:url" />
+	<meta content="https://flaringk.github.io/mspaMapGenerator/Homestuck_Cascade.png" property="og:image" />
+	<meta content="#71E874" data-react-helmet="true" name="theme-color" />
 
-	<link rel="shortcut icon" href="./window.png" type="image/x-icon">
-
+	<link rel="shortcut icon" href="./Homestuck_Cascade.png" type="image/x-icon">
 	<link rel="stylesheet" href="./style.css">
 	<link rel="stylesheet" href="./adventureStyle.css">
 </head>
@@ -16,13 +21,16 @@
 		<div id="introduction">
 			<div id="welcome">
 				<div>
-					<img src="./The_tumor.webp" alt="">
+					<img src="./The_tumor.png" alt="">
 				</div>
 				<div>
 					<h1>Homestuck Map Generator</h1>
 					<p>"Welcome to Homestuck Map Generator. This is a desktop web tool that generates a map similar to the one found in homestuck out of HTML. This is made with the site MSPFA in mind, however it also can be used to generate images of Homestuck Maps.</p>
 					<p>The map editor is split into 2 different groups, the Chapter editor and the Section editor. Each chapter contains a list of pages underneath it. And each section groups a number of chapters together. There can be multiple sections in different positions, and sections can overlap.</p>
 					<p>There are a number of tutorials and tips below. There is also a button to load an example adventure to explore how the editor works in action."</p>
+					<div id="welcomeNote">
+						<a href="https://flaringk.github.io/" target="_blank">createdBy(<span>"FlaringK"</span>);</a>
+					</div>
 				</div>
 			</div>
 			<div id="tutorials">
@@ -38,7 +46,7 @@
 				<details>
 					<summary>Using images</summary>
 					<div>
-						<p>This tool does not allow you to upload your own images to use, instead you must use another site to host your images and then link them here. <a href="https://filegarden.com/">File Garden</a> is a site that I would recommend.</p>
+						<p>This tool does not allow you to upload your own images to use, instead you must use another site to host your images and then link them here. <a href="https://filegarden.com/" target="_blank">File Garden</a> is a site that I would recommend.</p>
 						<p>The generator will automatically resize and crop the main chapter Image and any page images. This means if you are making an adventure that uses images hosted online, you can use your panel images directly as page and main images, saving you the work of cropping them yourself.</p>
 					</div>
 				</details>
