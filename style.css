@@ -246,6 +246,14 @@ button {
 	box-shadow: .1em .1em grey;
 }
 
+@media only screen and (max-width: 1100px) {
+	
+	#welcome img {
+		display: none;
+	}
+
+}
+
 @media only screen and (max-width: 900px) {
 
 	.previewOpen #miniPreviewWindow {
